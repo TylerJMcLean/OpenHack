@@ -18,15 +18,15 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: DSQL_USER
+        - name: SQL_USER
           value: "sqladminqFt0511"
-        - name: DSQL_PASSWORD
+        - name: SQL_PASSWORD
           value: "nG4vq6Pc4"
-        - name: DSQL_SERVER
+        - name: SQL_SERVER
           value: "sqlserverqft0511.database.windows.net"
-        - name: DSQL_DBNAME
+        - name: SQL_DBNAME
           value: "mydrivingDB"
-        - name: DOPENAPI_DOCS_URI
+        - name: OPENAPI_DOCS_URI
           value: "10.0.26.11:80"
-        - name: DDEBUG_LOGGING
+        - name: DEBUG_LOGGING
           value: "NO"
