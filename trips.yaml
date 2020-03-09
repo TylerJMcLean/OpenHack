@@ -18,7 +18,7 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: DSQL_USER	Yes	ENV or File	sqladmin	The username for the SQL Server database.
+        - name: DSQL_USER
           value: "sqladminqFt0511"
         - name: DSQL_PASSWORD
           value: "nG4vq6Pc4"
@@ -29,4 +29,4 @@ spec:
         - name: DOPENAPI_DOCS_URI
           value: "10.0.26.11:80"
         - name: DDEBUG_LOGGING
-          value: NO
+          value: "NO"
