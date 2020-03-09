@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-java
+spec:
+  selector:
+    matchLabels:
+      run: user-java
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: user-java
+    spec:
+      containers:
+      - name: user-java
+        image: registryqft0511.azurecr.io
+        ports:
+        - containerPort: 80
