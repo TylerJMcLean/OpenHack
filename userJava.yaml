@@ -12,17 +12,16 @@ spec:
       labels:
         run: user-java
     spec:
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: db-sqlserver-secrets
       containers:
-        - name: user-java
-      image: registryqft0511.azurecr.io/tripinsights/user-java:1.0
-      ports:
-        - containerPort: 80
-      env:
-        - name: SQL_SERVER
-          value: "sqlserverqft0511.database.windows.net"
-        - name: SQL_USER
-          value: "sqladminqFt0511"
-        - name: SQL_PASSWORD
-          value: "nG4vq6Pc4"
-        - name: SQL_DBNAME
-          value: "mydrivingDB"
+      - name: user-java
+        image: registryqft0511.azurecr.io/tripinsights/user-java:1.0
+        ports:
+          - containerPort: 80
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/secrets"
