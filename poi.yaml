@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poi
+spec:
+  selector:
+    matchLabels:
+      run: poi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: poi
+    spec:
+      containers:
+      - name: trips
+        image: registryqft0511.azurecr.io/tripinsights/poi:1.0
+        ports:
+        - containerPort: 80
+    spec:
+      containers:
+      - name: poi
+        image: registryqft0511.azurecr.io/tripinsights/poi:1.0
+        ports:
+        - containerPort: 80
+        env:
+        - name: SQL_SERVER
+          value: "sqlserverqft0511.database.windows.net"
+        - name: SQL_USER
+          value: "sqladminqFt0511"
+        - name: SQL_PASSWORD
+          value: "nG4vq6Pc4"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
