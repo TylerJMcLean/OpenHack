@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: userprofile
+  name: tripviewer
 spec:
   selector:
     matchLabels:
-      run: userprofile
-  replicas: 1
+      run: tripviewer
+  replicas: 2
   template:
     metadata:
       labels:
-        run: userprofile
+        run: tripviewer
     spec:
       containers:
-      - name: userprofile
-        image: registryqft0511.azurecr.io/tripinsights/userprofile:1.0
+      - name: tripviewer
+        image: registryqft0511.azurecr.io/tripinsights/tripviewer:1.0
         ports:
         - containerPort: 80
