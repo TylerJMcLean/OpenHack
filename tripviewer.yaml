@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       run: tripviewer
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -17,3 +17,8 @@ spec:
         image: registryqft0511.azurecr.io/tripinsights/tripviewer:1.0
         ports:
         - containerPort: 80
+        env:
+        - name: USERPROFILE_API_ENDPOINT
+          value: userprofile.default.svc.cluster.local
+        - name: TRIPS_API_ENDPOINT
+          value: userprofile.default.svc.cluster.local
