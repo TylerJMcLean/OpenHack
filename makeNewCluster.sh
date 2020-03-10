@@ -1,11 +1,11 @@
 #!/bin/bash
 
-set -x
+# set -x
 
 
 az acr login --name registryqft0511
 
-export aksname="tripAKSCluster-A"
+export aksname="tripAKSClusterC"
 export serverAppId=$(az ad app create \
   --display-name "${aksname}Server" \
   --identifier-uris "https://${aksname}Server" \
