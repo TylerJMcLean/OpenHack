@@ -3,3 +3,5 @@ apiVersion: apps/v1
 kind: Namespace
 metadata:
   name: web-dev
+  labels: 
+    name: Web
