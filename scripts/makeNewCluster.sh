@@ -1,16 +1,12 @@
 #!/bin/bash
 
-# set -x
+set -x
 
 
 az acr login --name registryqft0511
 
-export aksname="tripAKSClusterD"
-export serverAppId=$(az ad app create \
-  --display-name "${aksname}Server" \
-  --identifier-uris "https://${aksname}Server" \
-  --query appId -o tsv)
-
+export aksname="tripAKSClusterG"
+export serverAppId=$(az ad app create --display-name "${aksname}Server" --identifier-uris "https://${aksname}Server" --query appId -o tsv)
 az ad app update --id $serverAppId --set groupMembershipClaims=All
 az ad sp delete --id $serverAppId
 az ad sp create --id $serverAppId
@@ -23,7 +19,10 @@ export serverApplicationSecret=$(az ad sp credential reset \
 az ad app permission add \
   --id $serverAppId \
   --api 00000003-0000-0000-c000-000000000000 \
-  --api-permissions e1fe6dd8-ba31-4d61-89e7-88639da4683d=Scope 06da0dbc-49e2-44d2-8312-53f166ab848a=Scope 7ab1d382-f21e-4acd-a863-ba3e13f7da61=Role
+  --api-permissions \
+    e1fe6dd8-ba31-4d61-89e7-88639da4683d=Scope \
+    06da0dbc-49e2-44d2-8312-53f166ab848a=Scope \
+    7ab1d382-f21e-4acd-a863-ba3e13f7da61=Role
 
 az ad app permission grant --id 5ffffb1a-90a3-4ac6-9c0b-06d9e1a944ca --api 00000003-0000-0000-c000-000000000000
 
@@ -60,3 +59,4 @@ az aks create --resource-group teamResources --name $aksname \
 	--dns-service-ip 10.2.100.10 \
 	--service-cidr 10.2.100.0/24
 
+set +x
