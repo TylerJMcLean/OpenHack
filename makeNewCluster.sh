@@ -5,7 +5,7 @@ set -x
 
 az acr login --name registryqft0511
 
-export aksname="tripAKSCluster4"
+export aksname="tripAKSCluster-A"
 export serverAppId=$(az ad app create \
   --display-name "${aksname}Server" \
   --identifier-uris "https://${aksname}Server" \
@@ -39,9 +39,8 @@ az ad sp create --id $clientApplicationId
 
 oAuthPermissionId=$(az ad app show --id $serverAppId --query "oauth2Permissions[0].id" -o tsv)
 
-az ad app permission add --id $clientApplicationId --api $serverAppId --api-permissions ${oAuthPermissionId}=Scope
+az ad app permission add   --id $clientApplicationId --api $serverAppId --api-permissions ${oAuthPermissionId}=Scope
 az ad app permission grant --id $clientApplicationId --api $serverAppId
-
 az ad app permission grant --id $clientApplicationId --api $serverAppId
 
 VNET_ID=$(az network vnet show --resource-group teamResources --name Vnet --query id -o tsv)
