@@ -1,12 +1,18 @@
+#!/bin/bash
+
+set -x
+
+
 az acr login --name registryqft0511
 
-export aksname="tripAKSCluster3"
+export aksname="tripAKSCluster4"
 export serverAppId=$(az ad app create \
   --display-name "${aksname}Server" \
   --identifier-uris "https://${aksname}Server" \
   --query appId -o tsv)
 
 az ad app update --id $serverAppId --set groupMembershipClaims=All
+az ad sp delete --id $serverAppId
 az ad sp create --id $serverAppId
 
 export serverApplicationSecret=$(az ad sp credential reset \
@@ -41,7 +47,7 @@ az ad app permission grant --id $clientApplicationId --api $serverAppId
 VNET_ID=$(az network vnet show --resource-group teamResources --name Vnet --query id -o tsv)
 SUBNET_ID=$(az network vnet subnet show --resource-group teamResources --vnet-name Vnet --name vm-subnet --query id -o tsv)
 
-az aks create --resource-group teamResources --name tripAKSCluster \
+az aks create --resource-group teamResources --name $aksname \
 	--node-count 1 \
 	--generate-ssh-keys \
 	--kubernetes-version 1.15.7 \
@@ -53,5 +59,6 @@ az aks create --resource-group teamResources --name tripAKSCluster \
 	--network-plugin azure \
 	--vnet-subnet-id $SUBNET_ID \
 	--docker-bridge-address 172.17.0.1/16 \
-	--dns-service-ip 10.2.1.10 \
-	--service-cidr 10.2.1.0/24
+	--dns-service-ip 10.2.100.10 \
+	--service-cidr 10.2.100.0/24
+
