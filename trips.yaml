@@ -12,21 +12,31 @@ spec:
       labels:
         run: trips
     spec:
-      volumes:
-      - name: secret-volume
-        secret:
-          secretName: db-sqlserver-secrets
       containers:
       - name: trips
         image: registryqft0511.azurecr.io/tripinsights/trips:1.0
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: secret-volume
+        - name: keyvault
+          mountPath: /secrets
           readOnly: true
-          mountPath: "/secrets"
         env:
         - name: OPENAPI_DOCS_URI
           value: "10.0.26.11:80"
         - name: DEBUG_LOGGING
           value: "NO"
+      volumes:
+      - name: keyvault
+        flexVolume:
+          driver: "azure/kv"
+          secretRef:
+            name: kvcredentials              # [OPTIONAL] not required if using Pod Identity
+          options:
+            keyvaultname: "team14KeyVault"               # the name of the KeyVault
+            keyvaultobjectnames: sql-dbname;sql-password;sql-server;sql-username    # list of KeyVault object names (semi-colon separated)
+            keyvaultobjecttypes: secret;secret;secret;secret  # list of KeyVault object types: secret, key or cert (semi-colon separated)
+            keyvaultobjectaliases: SQL_DBNAME;SQL_PASSWORD;SQL_SERVER;SQL_USER
+            resourcegroup: "teamResources"              # [REQUIRED FOR < v0.0.14] the resource group of the KeyVault
+            subscriptionid: "c0b0ad00-c6a9-40a1-adaf-7d290c84721c"             # [REQUIRED FOR < v0.0.14] the subscription ID of the KeyVault
+            tenantid: "13823b52-457a-4034-b4aa-4b5666eb72c1"                   # the tenant ID of the KeyVault
