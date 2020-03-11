@@ -6,22 +6,22 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-admin
-subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: hacker1bln@OTAProd40ops.onmicrosoft.com
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: hacker2fqk@OTAProd40ops.onmicrosoft.com
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: hacker3k3x@OTAProd40ops.onmicrosoft.com
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: hacker4sy5@OTAProd40ops.onmicrosoft.com
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: hacker5p8b@OTAProd40ops.onmicrosoft.com
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: hacker6h2c@OTAProd40ops.onmicrosoft.com
+#subjects:
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: User
+#  name: hacker1bln@OTAProd40ops.onmicrosoft.com
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: User
+#  name: hacker2fqk@OTAProd40ops.onmicrosoft.com
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: User
+#  name: hacker3k3x@OTAProd40ops.onmicrosoft.com
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: User
+#  name: hacker4sy5@OTAProd40ops.onmicrosoft.com
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: User
+#  name: hacker5p8b@OTAProd40ops.onmicrosoft.com
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: User
+#  name: hacker6h2c@OTAProd40ops.onmicrosoft.com

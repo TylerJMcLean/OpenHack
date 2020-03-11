@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: admin-user-access
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: admin-access
+subjects:
+- kind: Group
+  namespace: kube-system
+  name: 50e5ac2f-e3a5-4dc2-a126-633b74a2790d

@@ -1,0 +1,14 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: admin-access
+  namespace: kube-system
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: [""]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
