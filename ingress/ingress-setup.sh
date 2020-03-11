@@ -37,9 +37,9 @@ kubectl apply -f hello-world-ingress.yaml
 
 export EXTERNAL_IP=$(kubectl get service -l app=nginx-ingress --namespace ingress-basic |awk '{print $4}' | head -2 | tail -1)
 
-echo Visit $EXTERNAL_IP in your browser to see the demo app
+echo Visit $EXTERNAL_IP in your browser to see the demo app...
 
-read
+read input
 
 ## Delete the sample namespace and all resources
 helm delete aks-helloworld aks-helloworld-two nginx-ingress --namespace ingress-basic
