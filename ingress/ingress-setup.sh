@@ -1,6 +1,6 @@
 
 
-export NS=ingress-1
+export NS=ingress-basic
 
 # Create separate namespace
 kubectl create namespace "$NS"
@@ -41,12 +41,13 @@ kubectl apply -f hello-world-ingress.yaml
 
 export EXTERNAL_IP=$(kubectl get service -l app=nginx-ingress --namespace "$NS" |awk '{print $4}' | head -2 | tail -1)
 
-echo Visit $EXTERNAL_IP in your browser to see the demo app...
+echo Visit \"$EXTERNAL_IP\" in your browser to see the demo app...
 
 read input
 
 ## Delete the sample namespace and all resources
-helm delete aks-helloworld aks-helloworld-two nginx-ingress --namespace "$NS"
+helm delete aks-helloworld aks-helloworld-two --namespace "$NS"
+helm delete nginx-ingress --namespace "$NS"
 
 
 helm repo remove azure-samples
@@ -54,4 +55,12 @@ helm repo remove azure-samples
 kubectl delete -f hello-world-ingress.yaml
 
 kubectl delete namespace "$NS"
+
+kubectl delete clusterrole nginx-ingress
+
+kubectl delete clusterrolebinding nginx-ingress
+
+kubectl delete clusterrole nginx-ingress
+
+
 
